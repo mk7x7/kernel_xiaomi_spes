@@ -950,7 +950,7 @@ static int show_smaps_rollup(struct seq_file *m, void *v)
 
 	hold_task_mempolicy(priv);
 
-	for (vma = priv->mm->mmap; vma;) {
+	for (vma = priv->mm->mmap; vma; vma = vma->vm_next) {
 #ifdef CONFIG_KSU_SUSFS_SUS_MAP
 		if (vma->vm_file && SUSFS_IS_INODE_SUS_MAP(file_inode(vma->vm_file)))
 			goto bypass_orig_flow;
